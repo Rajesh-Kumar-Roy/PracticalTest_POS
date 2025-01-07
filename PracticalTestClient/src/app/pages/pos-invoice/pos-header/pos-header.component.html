@@ -1,0 +1,31 @@
+<div class="d-flex align-items-center justify-content-between bg-light px-3 py-2 border-bottom">
+    <!-- Logo Section -->
+    <div class="d-flex align-items-center">
+      <img src="/assets/logo.jpg" alt="Logo" height="30" class="mr-3" />
+      <span class="font-weight-bold text-secondary">Medicine Invoice</span>
+    </div>
+  
+    <!-- Date Section -->
+    <div class="text-secondary">
+      <small>{{currentDate}} </small>
+    </div>
+  
+    <!-- Action Buttons -->
+    <div class="d-flex align-items-center">
+      <button class="btn btn-outline-secondary btn-sm mx-1">Report</button>
+      <button class="btn btn-outline-secondary btn-sm mx-1">Return</button>
+      <button class="btn btn-outline-secondary btn-sm mx-1">Recent</button>
+      <button class="btn btn-warning btn-sm mx-1">
+        Draft <span class="badge badge-light">0</span>
+      </button>
+      <button class="btn btn-outline-secondary btn-sm mx-1" *ngIf="!isFullScreen"(click)="goFullScreen()">Screen</button>
+      <button class="btn btn-success btn-sm mx-1">R</button>
+      <button class="btn btn-danger btn-sm mx-1" *ngIf="isFullScreen" (click)="exitFullScreen()">Exit</button>
+    </div>
+  
+    <!-- More Options -->
+    <div class="d-flex align-items-center">
+      <button class="btn btn-outline-secondary btn-sm">1</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,104 @@
+.modal-content {
+    border-radius: 0
+}
+
+.border-none {
+    border: none
+}
+
+.position-relative {
+    position: relative!important
+}
+
+.calcbuttons {
+    padding: 15px 15px 0
+}
+
+.calcbody {
+    position: fixed;
+    /* left: 30%; */
+    background: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.2);
+    border-radius: 14px;
+    padding-bottom: 20px;
+    width: 250px
+}
+
+.cacldisplay {
+    width: 100%;
+    height: 45px;
+    padding: 45px 0;
+    background: #029acf;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px
+}
+
+.calcbuttons {
+    padding: 15px 15px 0
+}
+
+.calcrow {
+    width: 220px;
+    float: left
+}
+
+.calcrow input[type=button] {
+    width: 45px;
+    height: 45px;
+    float: left;
+    padding: 0;
+    margin: 5px;
+    box-sizing: border-box;
+    background: #e7f7de;
+    border: none;
+    font-size: 24px;
+    line-height: 24px;
+    border-radius: 50%;
+    font-weight: 700;
+    color: #5e5858;
+    cursor: pointer
+}
+
+.calcrow button[type=button] {
+    width: 45px;
+    height: 45px;
+    float: left;
+    padding: 0;
+    margin: 5px;
+    box-sizing: border-box;
+    background: #e7f7de;
+    border: none;
+    font-size: 24px;
+    line-height: 24px;
+    border-radius: 50%;
+    font-weight: 700;
+    color: #5e5858;
+    cursor: pointer
+}
+
+.cacldisplay input[type=text] {
+    width: 200px;
+    height: 36px;
+    float: left;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    background: 0 0;
+    color: #fff;
+    text-align: right;
+    /* font-weight: 700; */
+    font-size: 36px;
+    line-height: 36px;
+    margin: 0 25px;
+    outline: none
+}
+
+.cacldispla input:focus {
+    outline: none
+}
+
+.calcred {
+    background: #ff0509!important;
+    color: #fff!important
+}
+

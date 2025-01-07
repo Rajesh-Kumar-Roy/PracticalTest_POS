@@ -1,0 +1,44 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="d-flex justify-content-center">
+                <h3>Product List</h3>
+              </div>
+        </div>
+            <div class="row">
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-primary" (click)="onCreateProduct()"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
+                  </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                  <table  class="table table-hover" style="cursor: pointer">
+                    <thead class="thead-light">
+                    <tr>
+                      <th>Sl</th>
+                      <th>Name</th>
+                      <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      @for (item of productData; track $index) {
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.price}}</td> 
+                        </tr>
+                    }
+                    <tr *ngIf="productData.length==0" >
+                      <td colspan="3"><h4 class="text-danger text-center"> No Data Found.</h4></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>  
+    </div>
+  </div>
+
+

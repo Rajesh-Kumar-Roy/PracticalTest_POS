@@ -1,0 +1,12 @@
+.btn {
+    font-size: 0.85rem;
+  }
+  .btn-warning {
+    position: relative;
+  }
+  .badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+  }
+  

@@ -1,0 +1,64 @@
+
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          type="text"
+          class="form-control"
+          formControlName="name"
+          placeholder="Enter customer name"
+        />
+        <div *ngIf="customerForm.get('name')?.invalid && customerForm.get('name')?.touched" class="text-danger">
+          Name is required and must be at most 100 characters.
+        </div>
+      </div>
+  
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Enter customer email"
+        />
+        <div *ngIf="customerForm.get('email')?.invalid && customerForm.get('email')?.touched" class="text-danger">
+          Enter a valid email.
+        </div>
+      </div>
+  
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          id="phone"
+          type="text"
+          class="form-control"
+          formControlName="phone"
+          placeholder="Enter customer phone"
+        />
+        <div *ngIf="customerForm.get('phone')?.invalid && customerForm.get('phone')?.touched" class="text-danger">
+          Phone is required.
+        </div>
+      </div>
+  
+      <!-- Address -->
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea
+          id="address"
+          class="form-control"
+          formControlName="address"
+          rows="3"
+          placeholder="Enter customer address"
+        ></textarea>
+        <div *ngIf="customerForm.get('address')?.invalid && customerForm.get('address')?.touched" class="text-danger">
+          Address is required and must be at most 255 characters.
+        </div>
+      </div>
+    </form>
+
+  

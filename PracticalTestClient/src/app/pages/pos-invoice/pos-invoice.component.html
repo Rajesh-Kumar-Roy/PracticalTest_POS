@@ -1,0 +1,196 @@
+
+ <section class="featured">
+    <app-pos-header></app-pos-header>
+    <div class="container-fluid">
+        <div class="row no-gap">
+            <!-- Left: Product List -->
+            <div class="col-md-7 border-right">
+                <div class="card p-1 card-height">
+                        <div class="row">
+                            <!-- Search and Filter -->
+                            <!-- <div class="d-flex justify-content-between align-items-center mb-3">
+                                <input type="text" class="form-control w-100"
+                                    placeholder="Search by Product name, Generic, Barcode no" />
+
+                            </div> -->
+
+                            <div class="form-group position-relative">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Search by Product name, Generic, Barcode no" 
+                                  [(ngModel)]="searchTerm"
+                                  (input)="onSearch()"
+                                />
+                                <!-- Suggestions dropdown -->
+                                <ul
+                                  class="list-group position-absolute w-100"
+                                  *ngIf="filteredItems.length > 0"
+                                  style="z-index: 1000; max-height: 200px; overflow-y: auto;"
+                                >
+                                  <li
+                                    class="list-group-item list-group-item-action"
+                                    *ngFor="let item of filteredItems"
+                                    (click)="selectItem(item.name)"
+                                  >
+                                    {{ item.name }}
+                                  </li>
+                                </ul>
+                              </div>
+                        </div>
+
+                        <div class="row">
+
+                            <ng-container class="sticky-top">
+                                <section class="col-3">
+
+                                    <ul class="list-group my-3">
+                                        <li class="list-group-item" 
+                                        [class.active]="type.id === this.posParams.typeId"
+                                        [value]="type.id"
+                                        (click)="onTypeSelected(type.id)"
+                                     [value]="type.id" *ngFor="let type of  productTypes">{{type.name}}</li>
+                                    </ul>
+                                </section>
+                            </ng-container>
+                            <div class="col-9">
+                                <div class="row">
+                                    <!-- Search and Filter -->
+                                    <div class="d-flex justify-content-between align-items-end my-2">
+                                        <span>Total Medicine<b>({{totalCount}})</b></span>
+                                        <select class="form-select w-50" id="exampleSelect1"(change)="onBrandSelected($event)">
+                                            <option [value]="item.id" 
+                                            *ngFor="let item of productBrands">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Product Cards -->
+                                <div class="row">
+                                    <div class="col-md-3 mb-3" *ngFor="let product of products">
+                                        <div class="card"  (click)="addToCart(product)" style="max-height: 170px; min-height: 170px;">
+                                            <img [src]="product.pictureUrl" onerror="this.src='assets/no_image2.jpg';" class="card-img-top" alt="Product" style="height: 96px;" />
+                                            <div class="card-body cardPadding">
+                                                <h6 class="cardPadding">{{ product.name }}</h6>
+                                                <p class="text-muted max-height mb-0"><b>Tk. {{ product.price }}</b></p>
+                                                <p class="text-success mt-0">{{product.isAvailable ? 'In stock': 'Out of stock'}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end" *ngIf="totalCount > 13">
+                                    <app-pager
+                                            [pageSize]="this.posParams.pageSize"
+                                            [totalCount]="totalCount"
+                                            [pageNumber]="posParams.pageNumber"
+                                            (pageChanged)="onPageChanged($event)"
+                                    ></app-pager>
+                                  </div>
+                            </div>
+                        </div>
+                   
+                </div>
+            </div>
+
+            <!-- Right: Cart Summary -->
+            <div class="col-md-5">
+                <div class="card p-2 card-height">
+                        <!-- Customer Info -->
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <select class="form-control w-75" (change)="onCustomerSelected($event)">
+                                <option [value]="item.id" *ngFor="let item of customers" >{{item.name}}</option>
+
+                            </select>
+                            <button class="btn btn-success btn-sm" (click)="openModal()"><i class="fa fa-plus"></i> Add Customer</button>
+                        </div>
+
+                        <!-- Cart Table -->
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Unit</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Disc</th>
+                                    <th>Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of cart">
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.unit }}</td>
+                                    <td>{{ item.price }}</td>
+                                    <td>
+                                        <div class="input-group input-group-sm">
+                                            <button class="btn btn-danger btn-sm" (click)="decreaseQty(item)">-</button>
+                                            <input type="text" class="form-control text-center" [value]="item.qty"
+                                                readonly />
+                                            <button class="btn btn-success btn-sm"
+                                                (click)="increaseQty(item)">+</button>
+                                        </div>
+                                    </td>
+                                    <td>{{ item.discount }}</td>
+                                    <td>{{ item.subtotal }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger" (click)="removeFromCart(item)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Summary Section -->
+                        <div class="d-flex justify-content-between my-3">
+                            <span>Subtotal</span>
+                            <span>Tk. {{ subtotal }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between my-3">
+                            <span>Discount</span>
+                            <span>Tk. {{ discount }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between my-3">
+                            <span>Vat/Tax</span>
+                            <span>Tk. {{ vat }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between my-3">
+                            <span>Adjustment</span>
+                            <span>Tk. {{ adjustment }}</span>
+                        </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    
+    <app-pos-footer (ButtonEvent)="onResetItems($event)" (DisCountButtonEvent)="onDiscountAmount($event)" (paymentButtonEvent)="onPaymentSubmit($event)" [footerTotalAmount]="totalAmount" ></app-pos-footer>
+</section>
+<app-modal
+[title]="'Add Customer'"
+[showModal]="isModalVisible"
+(closeModalEvent)="closeModal()"
+[modalSizeClass]="'modal-md'"
+[modalLeftButtonName]="'Cancel'"
+[modalLeftClassName]="'danger'"
+(submitButtonEvent)="modalSubmit()"
+>
+    <app-customer-create></app-customer-create>
+</app-modal>
+
+<app-modal
+[title]="'Discount Amount'"
+[showModal]="isDiscountModalVisible"
+(closeModalEvent)="closeModal()"
+[modalSizeClass]="'modal-sm'"
+[modalLeftButtonName]="'Cancel'"
+[modalLeftClassName]="'danger'"
+[modalRightButtonName]="'Discount'"
+[modalRightClassName]="'warning'"
+(submitButtonEvent)="modalDiscountCalculation()"
+>
+<input type="text" class="form-control" [(ngModel)] ="disCountAmount" placeholder="Amount(TK)">
+</app-modal>
+
+

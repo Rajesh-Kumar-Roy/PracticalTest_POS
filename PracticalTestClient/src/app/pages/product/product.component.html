@@ -1,0 +1,36 @@
+<div class="container">
+  <div class=" card border-primary mt-5">
+    <div class="card-body">
+      <div class="card-header text-center">
+          <h4 class="text-primary"><strong>Product</strong></h4>
+      </div>
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="row g-3">
+            <div class="col-md-6">
+              <label for="inputAddress" class="form-label">Name</label>
+              <input type="text" class="form-control" formControlName="name" id="inputAddress" placeholder="name"
+              [ngClass]="{ 'is-invalid': productForm.controls['name'].invalid && (productForm.controls['name'].dirty || productForm.controls['name'].touched) }">
+          
+              <div *ngIf="productForm.controls['name']?.invalid && (productForm.controls['name']?.dirty || productForm.controls['name']?.touched)" class="invalid-feedback">
+                <div *ngIf="productForm.controls['name']?.errors?.['required']">This field is required.</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <label for="inputAddress" class="form-label">Price</label>
+                <input type="number" class="form-control" formControlName="price" id="inputAddress" placeholder="Price"
+                [ngClass]="{ 'is-invalid': productForm.controls['price'].invalid && (productForm.controls['price'].dirty || productForm.controls['price'].touched) }">
+            
+                <div *ngIf="productForm.controls['price']?.invalid && (productForm.controls['price']?.dirty || productForm.controls['price']?.touched)" class="invalid-feedback">
+                  <div *ngIf="productForm.controls['price']?.errors?.['required']">This field is required.</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="d-flex justify-content-end">
+                  <button class="btn btn-info " routerLink="/productlist"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button> &nbsp;
+                  <button class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>

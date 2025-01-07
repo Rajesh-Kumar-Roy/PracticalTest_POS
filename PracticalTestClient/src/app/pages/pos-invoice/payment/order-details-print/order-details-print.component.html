@@ -1,0 +1,92 @@
+<div id="invoice-content">
+    <div class="print-btn">
+        <button onclick="window.print()">Print Invoice</button>
+    </div>
+
+    <div class="content-center">
+        <img src="../../../../../../public/assets/no_image.jpg " style="width: 15%;" class="img img-responsive2 height-mb">
+
+
+
+        <br>
+        <strong>
+            <div>Invoice No: {{ orderPayment.orderId }}</div>
+            <div>Billing Date: {{orderPayment.paymentDate | date: 'MMM d, y, h:mm a'}}</div>
+        </strong>
+        <div>Payment Method: {{PaymentMethodStatus[orderPayment.paymentMethodStatus]}}</div>
+        <div *ngIf="PaymentMethodStatus.BankOrCard == orderPayment.paymentMethodStatus">
+            Bank Name: {{orderPayment.bankName}}</div>
+        <div>Payment Status: {{PaymentStatus[orderPayment.paymentStatus]}}</div>
+        <div class="content-left">
+            Customer: {{orderInVoice.customerName || 'Walk-In Customer'}} <br>
+        </div>
+    </div>
+    <br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>    </th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <ng-container *ngFor="let item of orderInVoice.orderItems">
+                <tr>
+                    <td>
+                        <strong>
+                            {{item.productName}}
+                        </strong>
+                    </td>
+                    <td>      </td>
+                    <td>{{item.quantity}}</td>
+                    <td> {{item.price}} </td>
+                    <td>
+                        {{item.quantity* item.price }}
+                    </td>
+                </tr>
+
+            </ng-container>
+
+            <tr class="total-row">
+                <td colspan="4">Subtotal</td>
+                <td>{{orderInVoice.subTotal.toFixed(2)}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">Vat
+                    (0%)</td>
+                <td>{{orderInVoice.vatAmount.toFixed(2)}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">Service Charge
+                    (0%)</td>
+                <td>0.00</td>
+            </tr>
+            <tr>
+                <td colspan="4">Discount</td>
+                <td>{{orderInVoice.discountAmount?.toFixed(2)}}</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="4">Grand Total</td>
+                <td>{{orderInVoice.total}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">Paid</td>
+                <td>{{orderPayment.paidAmount?.toFixed(2)}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">Change</td>
+                <td> {{orderPayment.returnAmount?.toFixed(2)}} </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div class="content-center thank-you">
+        <strong>Thank you for your purchase!</strong><br>
+        <small>Visit again!</small>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+.card-height{
+    height: 84vh;
+    overflow: auto;
+    overflow-x: hidden;
+}
+  
+  .table th, .table td {
+    vertical-align: middle;
+  }
+  
+  .input-group-sm .btn {
+    padding: 0.25rem 0.5rem;
+  }
+  .row.no-gap {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  
+  .row.no-gap > [class*="col-"] {
+    padding-right: 1px;
+    padding-left: 0;
+  }
+  
+
+  .list-group-item {
+    cursor: pointer;
+  }
+  
+  .list-group-item:hover {
+    background-color: #14A085;
+    color: white;
+  }
+
+.cardPadding{
+    padding: 0px;
+    text-align: center;
+    font-size: x-small;
+}
